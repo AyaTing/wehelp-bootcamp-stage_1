@@ -182,10 +182,7 @@ figcaption {
   }
 }
 
-@media screen and (min-width: 360px) and (max-width: 600px) {
-  .header-title {
-    font-size: 1.5rem;
-  }
+@media screen and (max-width: 600px) {
   main {
     width: 90%;
   }
