@@ -19,7 +19,7 @@ const closeMenu = () => {
   if (navList.classList.contains("open")) {
     navList.classList.remove("open");
     navMenuButton.classList.remove("open");
-    navMenuButtonIcon.src = "/assets/menu_nav_icon.svg";
+    navMenuButtonIcon.src = "assets/menu_nav_icon.svg";
   }
   return;
 };
