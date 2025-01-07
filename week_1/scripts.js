@@ -8,10 +8,10 @@ const toggleMenu = () => {
   navList.classList.toggle("open");
   if (navList.classList.contains("open")) {
     navMenuButton.classList.add("open");
-    navMenuButtonIcon.src = "/week_1/assets/menu_close_icon.svg";
+    navMenuButtonIcon.src = "assets/menu_close_icon.svg";
   } else {
     navMenuButton.classList.remove("open");
-    navMenuButtonIcon.src = "/week_1/assets/menu_nav_icon.svg";
+    navMenuButtonIcon.src = "assets/menu_nav_icon.svg";
   }
 };
 
@@ -19,7 +19,7 @@ const closeMenu = () => {
   if (navList.classList.contains("open")) {
     navList.classList.remove("open");
     navMenuButton.classList.remove("open");
-    navMenuButtonIcon.src = "/week_1/assets/menu_nav_icon.svg";
+    navMenuButtonIcon.src = "/assets/menu_nav_icon.svg";
   }
   return;
 };
