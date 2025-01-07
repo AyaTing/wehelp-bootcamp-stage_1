@@ -57,7 +57,7 @@ a {
 
 .header-title {
   font-size: 2rem;
-  margin: 0 1rem;
+  margin: 0 0.5rem;
 }
 
 main {
@@ -187,6 +187,11 @@ figcaption {
   main {
     width: 90%;
   }
+  .header-title {
+    max-width: 100%;
+    text-align: center;
+  }
+
   .promotion-container {
     width: 100%;
     grid-template-columns: 1fr;
