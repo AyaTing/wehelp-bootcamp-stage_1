@@ -160,15 +160,18 @@ figcaption {
 }
 
 @media screen and (min-width: 600px) and (max-width: 1200px) {
-  .promotion-container {
+  main {
     width: 90%;
+  }
+  .promotion-container {
+    width: 100%;
     grid-template-columns: repeat(2, 1fr);
   }
   .promotion:last-child {
     grid-column: 1 / 3;
   }
   .card-container {
-    width: 90%;
+    width: 100%;
     grid-template-columns: repeat(4, 1fr);
   }
   .card:nth-child(9) {
@@ -183,12 +186,15 @@ figcaption {
   .header-title {
     font-size: 1.5rem;
   }
-  .promotion-container {
+  main {
     width: 90%;
+  }
+  .promotion-container {
+    width: 100%;
     grid-template-columns: 1fr;
   }
   .card-container {
-    width: 90%;
+    width: 100%;
     grid-template-columns: 1fr;
   }
   .nav-menu-button {
