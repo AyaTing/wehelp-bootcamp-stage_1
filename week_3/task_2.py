@@ -11,20 +11,25 @@ def get_page(src_url="string"):
     with req.urlopen(request) as response:
         page_list = response.read().decode('utf-8')
     root = bs4.BeautifulSoup(page_list,"html.parser")
-    titles = root.find_all("div", class_="title")
-    like_counts = root.find_all("span", class_="hl f2")
+    articles = root.find_all("div", class_="r-ent")
     page_data = []
-    for title, like_count in zip(titles, like_counts):
+
+    for article in articles:
+        title = article.find("div", class_="title")
         if title.a != None:
+            like_count_div = article.find("div", class_="nrec")
+            like_count = article.find("span", class_="hl") if like_count_div else None
+            like_count_value = like_count.string if like_count else "0"
             page_links ="https://www.ptt.cc" + title.a["href"]
             request = req.Request(page_links, headers = {"Cookie":"over18=1","User-Agent":user_agent})
             with req.urlopen(request) as response:
                 page_content = response.read().decode('utf-8')
             page_root = bs4.BeautifulSoup(page_content,"html.parser")
-            time_meta = page_root.find("span",string="時間")
+            time_meta = page_root.find("span",string="時間") 
+            publish_time = ""
             publish_time_elements = time_meta.find_next_sibling("span", class_="article-meta-value") if time_meta else ""
             publish_time = publish_time_elements.string if publish_time_elements else ""
-            page_data.append([title.a.string, like_count.string if like_count.string else "0",publish_time])
+            page_data.append([title.a.string,like_count_value ,publish_time])
     # 先用 page_data 儲存每頁，再反向插入，以處理 PTT 文章每頁倒序問題
     data.insert(0,page_data) 
     previous_page = root.find("a",string="‹ 上頁")
@@ -42,5 +47,4 @@ while p < 3:
     src_url = get_page(src_url)
     p+=1
 
-get_page(src_url)
 print_pages(data)
