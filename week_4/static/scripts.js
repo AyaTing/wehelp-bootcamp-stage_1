@@ -2,9 +2,6 @@ const signInForm = document.querySelector(".sign-in-form");
 const checkbox = document.querySelector("#terms");
 const calculateForm = document.querySelector(".calculate-form");
 const inputElement = document.querySelector("#positive-integer-input");
-const labelElement = document.querySelector(".positive-integer-label");
-const inputContainer = document.querySelector(".positive-integer-container");
-const calculateButton = document.querySelector(".calculate-button");
 
 const checkPositiveInteger = (e) => {
   e.preventDefault();
