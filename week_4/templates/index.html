@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for("static", path="/styles.css") }}" />
+    <title>Assignment - Week 4</title>
+  </head>
+  <body>
+    <header><h1>歡迎光臨，請輸入帳號密碼</h1></header>
+    <main>
+      <h2>登入系統</h2>
+      <form action="{{ url_for('signin') }}" method="post" class="sign-in-form">
+        <div>
+          <label for="username">帳號</label>
+          <input type="text" name="username" id="username"/>
+        </div>
+        <div>
+          <label for="password">密碼</label>
+          <input type="password" name="password" id="password"/>
+        </div>
+        <div>
+          <label for="terms">同意條款</label>
+          <input type="checkbox" name="terms" id="terms"/>
+        </div>
+        <div><input type="submit" value="登入" class="submit-button"/></div>
+      </form>
+      <hr />
+      <h2>計算正整數的平方</h2>
+      <form action="" class="calculate-form">
+        <div class="positive-integer-container">
+          <label for="positive-integer" class="positive-integer-label" >正整數</label>
+          <input type="text" name="positive-integer" id="positive-integer-input"/>
+        </div>
+        <div><input type="submit" value="計算" class="calculate-button"/></div>
+      </form>
+    </main>
+    
+    <script src="{{ url_for("static", path="/scripts.js") }}"></script>
+  </body>
+</html>
