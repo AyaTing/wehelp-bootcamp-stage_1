@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/styles.css') }}" />
+    <title>Assignment - Week 6</title>
+  </head>
+  <body>
+    <header><h1>失敗頁面</h1></header>
+    <main>
+      {% if message %}
+      <h2>{{message}}</h2>
+      {% endif %}
+      <a href="/">返回首頁</a>
+    </main>
+  </body>
+</html>

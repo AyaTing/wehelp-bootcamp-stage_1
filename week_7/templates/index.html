@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static',path='/styles.css') }}" />
+    <title>Assignment - Week 6</title>
+  </head>
+  <body>
+    <header><h1>歡迎光臨，請註冊登入系統</h1></header>
+    <main>
+      <h2>註冊帳號</h2>
+      <form action="{{ url_for('signup') }}" method="post" class="sign-up-form">
+        <div>
+          <label for="name">姓名</label>
+          <input
+            type="text"
+            name="name"
+            id="signup-name"
+            required
+            pattern=".*\S.*"
+          />
+        </div>
+        <div>
+          <label for="username">帳號</label>
+          <input
+            type="text"
+            name="username"
+            id="signup-username"
+            required
+            pattern=".*\S.*"
+          />
+        </div>
+        <div>
+          <label for="password">密碼</label>
+          <input
+            type="password"
+            name="password"
+            id="signup-password"
+            required
+            pattern=".*\S.*"
+          />
+        </div>
+        <div><input type="submit" value="註冊" class="signup-button" /></div>
+      </form>
+      <hr />
+      <h2>登入系統</h2>
+      <form action="{{ url_for('signin') }}" method="post" class="sign-in-form">
+        <div>
+          <label for="username">帳號</label>
+          <input type="text" name="username" id="signin-username" required />
+        </div>
+        <div>
+          <label for="password">密碼</label>
+          <input
+            type="password"
+            name="password"
+            id="signin-password"
+            required
+          />
+        </div>
+        <div><input type="submit" value="登入" class="signin-button" /></div>
+      </form>
+    </main>
+    <script src="{{ url_for("static", path="/scripts.js") }}"></script>
+  </body>
+</html>

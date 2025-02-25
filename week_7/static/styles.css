@@ -1,0 +1,114 @@
+* {
+  box-sizing: border-box;
+  position: relative;
+  min-width: 0;
+  font-size: 16px;
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+header {
+  background-color: #1c2739;
+  height: 20vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+header > h1 {
+  color: #fff;
+  font-size: 3rem;
+  text-align: center;
+}
+
+main {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main > h2 {
+  font-size: 2rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+form > div {
+  margin: 0.5rem;
+}
+
+label {
+  margin-right: 0.5rem;
+  font-size: 1.3rem;
+  vertical-align: middle;
+}
+
+input {
+  vertical-align: middle;
+}
+
+button {
+  padding: 0.2rem 0.5rem;
+}
+
+a {
+  font-size: 1.5rem;
+}
+
+hr {
+  width: 80%;
+  opacity: 50%;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.message-board * {
+  font-size: 1.3rem;
+  margin: 0.5rem;
+}
+
+.delete-button {
+  font-size: 0.8rem;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.delete-message-form {
+  display: block;
+}
+
+.member-query-form,
+.name-update-form {
+  display: block;
+}
+
+.member-query-button,
+.name-update-button {
+  margin-left: 0.5rem;
+}
+
+h3 {
+  text-align: center;
+  font-size: 1.3rem;
+}
