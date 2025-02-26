@@ -18,7 +18,10 @@ const memberQuery = (e) => {
   fetch(`/api/member?username=${username}`)
     .then((response) => response.json())
     .then((result) => {
-      if (result.data && result.data.id) {
+      if (result.error) {
+        queryDisplay.textContent = "無查詢權限，請重新登入";
+        queryInput.value = "";
+      } else if (result.data && result.data.id) {
         const userName = result.data.name;
         const userUsername = result.data.username;
         queryDisplay.textContent = `${userName}（${userUsername}）`;
@@ -38,7 +41,7 @@ const nameUpdate = (e) => {
   e.preventDefault();
   const newName = updateInput.value.trim();
   if (!newName) {
-    updateResult.textContent = "此欄位不得為空白";
+    updateResult.textContent = "輸入欄位不得為空白";
     updateInput.value = "";
     return;
   }

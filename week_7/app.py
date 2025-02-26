@@ -78,8 +78,8 @@ async def read_root(request: Request):
 async def signup(sign_up_data: Annotated[FormData,Form()], request: Request):
     with DataBase(**DB_CONFIG) as db:
         cursor = db.connection.cursor(dictionary=True)
-        query = "SELECT * FROM `member` WHERE `username` = %s"
-        cursor.execute(query, (sign_up_data.username,))
+        select_query = "SELECT * FROM `member` WHERE `username` = %s"
+        cursor.execute(select_query, (sign_up_data.username,))
         user = cursor.fetchone()
         if user:
             error_token = secrets.token_hex(4)
@@ -95,8 +95,8 @@ async def signup(sign_up_data: Annotated[FormData,Form()], request: Request):
 async def signin(sign_in_data: Annotated[FormData,Form()], request: Request):
     with DataBase(**DB_CONFIG) as db:
         cursor = db.connection.cursor(dictionary=True)
-        query = "SELECT * FROM `member` WHERE `username` = %s"
-        cursor.execute(query, (sign_in_data.username,))
+        select_query = "SELECT * FROM `member` WHERE `username` = %s"
+        cursor.execute(select_query, (sign_in_data.username,))
         user = cursor.fetchone()
         if user and user["password"] == sign_in_data.password:
             request.session["authenticated"] = True
@@ -114,8 +114,8 @@ async def read_member_page(request: Request):
     id = int(request.session.get("id"))
     with DataBase(**DB_CONFIG) as db:
         cursor = db.connection.cursor(dictionary=True)
-        query = "SELECT `message`.`id`,`message`.`member_id`,`member`.`name`, `message`.`content` FROM `member` JOIN `message` ON `message`.`member_id` = `member`.`id`"
-        cursor.execute(query,)
+        select_query = "SELECT `message`.`id`,`message`.`member_id`,`member`.`name`, `message`.`content` FROM `member` JOIN `message` ON `message`.`member_id` = `member`.`id`"
+        cursor.execute(select_query,)
         messages = cursor.fetchall()
     return templates.TemplateResponse("member.html", {"request": request, "name": name, "id": id, "messages": messages})
 
@@ -142,8 +142,8 @@ async def create_message(message_data:Annotated[FormMessage,Form()], request: Re
             return RedirectResponse(url="/", status_code=303)
         else:
             cursor = db.connection.cursor(dictionary=True)
-            query = "INSERT INTO `message`(`member_id`, `content`) VALUES(%s, %s)"
-            cursor.execute(query,(id, message_data.content))
+            insert_query = "INSERT INTO `message`(`member_id`, `content`) VALUES(%s, %s)"
+            cursor.execute(insert_query,(id, message_data.content))
             db.connection.commit()
         return RedirectResponse(url="/member", status_code=303)
     
@@ -153,8 +153,8 @@ async def delete_message(message_id: Annotated[int, Form()], request: Request):
     with DataBase(**DB_CONFIG) as db:
         id = request.session.get("id")
         cursor = db.connection.cursor(dictionary=True)
-        query = "DELETE FROM `message` WHERE `id` = %s AND `member_id` = %s"
-        cursor.execute(query, (message_id, id))
+        delete_query = "DELETE FROM `message` WHERE `id` = %s AND `member_id` = %s"
+        cursor.execute(delete_query, (message_id, id))
         db.connection.commit()
     return RedirectResponse(url="/member", status_code=303)
 

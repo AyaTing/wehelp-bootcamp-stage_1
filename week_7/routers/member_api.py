@@ -29,10 +29,13 @@ class NameUpdate(BaseModel):
 
 
 @router.get("/member")
-def member_query(username: str, db=Depends(get_db)):
+async def member_query(username: str, request: Request, db=Depends(get_db)):
+    is_authenticated = request.session.get("authenticated",False)
+    if not is_authenticated:
+        return {"error": True}
     cursor = db.cursor(dictionary=True)
-    query = "SELECT `id`, `name`, `username` FROM `member` WHERE `username` = %s"
-    cursor.execute(query, (username,))
+    select_query = "SELECT `id`, `name`, `username` FROM `member` WHERE `username` = %s"
+    cursor.execute(select_query, (username,))
     user = cursor.fetchone()
     if user:
         return {"data": {"id": user["id"], "name": user["name"], "username": username}}
@@ -41,16 +44,16 @@ def member_query(username: str, db=Depends(get_db)):
     
 
 @router.patch("/member")
-def name_update(update_date: NameUpdate, request: Request, db=Depends(get_db)):
+async def name_update(update_data: NameUpdate, request: Request, db=Depends(get_db)):
+    is_authenticated = request.session.get("authenticated",False)
     id = request.session.get("id")
-    if id:
-        cursor = db.cursor(dictionary=True)
-        query = "UPDATE `member` SET `name` = %s WHERE `id` = %s"
-        cursor.execute(query, (update_date.name, id))
-        db.commit()
-        request.session["name"] = update_date.name
-        return {"ok": True}
-    else:
+    if not is_authenticated or not id:
         return {"error": True}
+    cursor = db.cursor(dictionary=True)
+    update_query = "UPDATE `member` SET `name` = %s WHERE `id` = %s"
+    cursor.execute(update_query, (update_data.name, id))
+    db.commit()
+    request.session["name"] = update_data.name
+    return {"ok": True}
 
 
